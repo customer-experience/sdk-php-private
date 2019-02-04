@@ -1,0 +1,153 @@
+{
+    "resources": {
+        "argument_converter": "\\Andreani\\Resources\\SoapArgumentConverter"
+    },
+    "webservices": {
+        "prod": {
+            "cotizacion": {
+                "url": "https://cotizador.andreani.com/ws?wsdl",
+                "method": "CotizarEnvio",
+                "headers": ["auth"],
+                "message_type":"external"
+            },
+            "trazabilidad": {
+                "url": "https://www.e-andreani.com/eAndreaniWS/Service.svc?wsdl",
+                "method": "ObtenerTrazabilidad",
+                "headers": [],
+                "message_type":"internal"
+            },
+            "trazabilidad_codificado": {
+                "url": "https://www.e-andreani.com/eAndreaniWS/Service.svc?wsdl",
+                "method": "ObtenerTrazabilidadCodificado",
+                "headers": [],
+                "message_type":"internal"
+            },
+            "impresion_constancia" : {
+                "url": "https://integraciones.andreani.com:5000/E-ImposicionRemota?wsdl",
+                "method": "ImprimirConstancia",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "estado_distribucion" : {
+                "url": "https://www.e-andreani.com/eAndreaniWS/Service.svc?wsdl",
+                "method": "ObtenerEstadoDistribucion",
+                "headers": [],
+                "message_type":"external"
+            },
+            "estado_distribucion_codificado" : {
+                "url": "https://www.e-andreani.com/eAndreaniWS/Service.svc?wsdl",
+                "method": "ObtenerEstadoDistribucionCodificado",
+                "headers": [],
+                "message_type":"external"
+            },
+            "sucursales" : {
+                "url": "https://sucursales.andreani.com/ws?wsdl",
+                "method": "ConsultarSucursales",
+                "headers": ["auth"],
+                "message_type":"external"
+            },
+            "confirmacion_compra" : {
+                "url": "https://integraciones.andreani.com:5000/E-ImposicionRemota?wsdl",
+                "method": "ConfirmarCompra",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "generar_envio_con_datos_de_impresion_y_remitente" : {
+                "url": "https://integraciones.andreani.com:5000/DatosImpresion?wsdl",
+                "method": "GenerarEnvioConDatosDeImpresionYRemitente",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "generar_envios_de_entrega_y_retiro_con_datos_de_impresion" : {
+                "url": "https://integraciones.andreani.com:5000/DatosImpresion?wsdl",
+                "method": "GenerarEnviosDeEntregaYRetiroConDatosDeImpresion",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "anular_envio" : {
+                "url": "https://integraciones.andreani.com:5000/E-ImposicionRemota?wsdl",
+                "method": "AnularEnvios",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            }
+        },
+        "test": {
+            "cotizacion": {
+                "url": "https://cotizadorpreprod.andreani.com/ws?wsdl",
+                "method": "CotizarEnvio",
+                "headers": ["auth"],
+                "message_type":"external"
+            },
+            "trazabilidad": {
+                "url": "https://www.e-andreani.com/eAndreaniWSStaging/Service.svc?wsdl",
+                "method": "ObtenerTrazabilidad",
+                "headers": [],
+                "message_type":"internal"
+            },
+            "trazabilidad_codificado": {
+                "url": "https://www.e-andreani.com/eAndreaniWSStaging/Service.svc?wsdl",
+                "method": "ObtenerTrazabilidadCodificado",
+                "headers": [],
+                "message_type":"internal"
+            },
+            "impresion_constancia" : {
+                "url": "https://integracionestest.andreani.com:4000/E-ImposicionRemota?wsdl",
+                "method": "ImprimirConstancia",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "estado_distribucion" : {
+                "url": "https://www.e-andreani.com/eAndreaniWSStaging/Service.svc?wsdl",
+                "method": "ObtenerEstadoDistribucion",
+                "headers": [],
+                "message_type":"external"
+            },
+            "estado_distribucion_codificado" : {
+                "url": "https://www.e-andreani.com/eAndreaniWSStaging/Service.svc?wsdl",
+                "method": "ObtenerEstadoDistribucionCodificado",
+                "headers": [],
+                "message_type":"external"
+            },
+            "sucursales" : {
+                "url": "https://sucursalespreprod.andreani.com/ws?wsdl",
+                "method": "ConsultarSucursales",
+                "headers": ["auth"],
+                "message_type":"external"
+            },
+            "confirmacion_compra" : {
+                "url": "https://integracionestest.andreani.com:4000/E-ImposicionRemota?wsdl",
+                "method": "ConfirmarCompra",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "generar_envio_con_datos_de_impresion_y_remitente" : {
+                "url": "https://integracionestest.andreani.com:4000/DatosImpresion?wsdl",
+                "method": "GenerarEnvioConDatosDeImpresionYRemitente",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "generar_envios_de_entrega_y_retiro_con_datos_de_impresion" : {
+                "url": "https://integracionestest.andreani.com:4000/DatosImpresion?wsdl",
+                "method": "GenerarEnviosDeEntregaYRetiroConDatosDeImpresion",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            },
+            "anular_envio" : {
+                "url": "https://integracionestest.andreani.com:4000/E-ImposicionRemota?wsdl",
+                "method": "AnularEnvios",
+                "headers": ["auth"],
+                "message_type":"external",
+                "soap_version": "SOAP_1_1"
+            }
+        }
+    }
+}
