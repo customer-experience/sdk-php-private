@@ -5,45 +5,55 @@ namespace Andreani\Resources;
 use Andreani\Resources\WebserviceRequest;
 use Andreani\Resources\ArgumentConverter;
 
-class SoapArgumentConverter implements ArgumentConverter{
-    
-    public function getArgumentChain(WebserviceRequest $consulta){
-        if($consulta->getWebserviceIndex() == 'cotizacion') return $this->convertCotizacion($consulta);
-        if($consulta->getWebserviceIndex() == 'trazabilidad') return $this->convertTrazabilidad($consulta);
-        if($consulta->getWebserviceIndex() == 'trazabilidad_codificado') return $this->convertTrazabilidadCodificado($consulta);
-        if($consulta->getWebserviceIndex() == 'impresion_constancia') return $this->convertImpresionConstancia($consulta);
-        if($consulta->getWebserviceIndex() == 'estado_distribucion') return $this->convertEstadoDistribucion($consulta);
-        if($consulta->getWebserviceIndex() == 'estado_distribucion_codificado') return $this->convertEstadoDistribucionCodificado($consulta);
-        if($consulta->getWebserviceIndex() == 'sucursales') return $this->convertSucursales($consulta);
-        if($consulta->getWebserviceIndex() == 'confirmacion_compra') return $this->convertConfirmacionCompra($consulta);
-        if($consulta->getWebserviceIndex() == 'generar_envios_de_entrega_y_retiro_con_datos_de_impresion') return $this->convertGenerarEnviosDeEntregaYRetiroConDatosDeImpresion($consulta);
-        if($consulta->getWebserviceIndex() == 'anular_envio') return $this->convertAnularEnvio($consulta);
-        if($consulta->getWebserviceIndex() == 'generar_envio_con_datos_de_impresion_y_remitente') return $this->convertGenerarEnvioConDatosDeImpresionYRemitente($consulta);
+class SoapArgumentConverter implements ArgumentConverter {
+
+    public function getArgumentChain(WebserviceRequest $consulta) {
+        if ($consulta->getWebserviceIndex() == 'cotizacion')
+            return $this->convertCotizacion($consulta);
+        if ($consulta->getWebserviceIndex() == 'trazabilidad')
+            return $this->convertTrazabilidad($consulta);
+        if ($consulta->getWebserviceIndex() == 'trazabilidad_codificado')
+            return $this->convertTrazabilidadCodificado($consulta);
+        if ($consulta->getWebserviceIndex() == 'impresion_constancia')
+            return $this->convertImpresionConstancia($consulta);
+        if ($consulta->getWebserviceIndex() == 'estado_distribucion')
+            return $this->convertEstadoDistribucion($consulta);
+        if ($consulta->getWebserviceIndex() == 'estado_distribucion_codificado')
+            return $this->convertEstadoDistribucionCodificado($consulta);
+        if ($consulta->getWebserviceIndex() == 'sucursales')
+            return $this->convertSucursales($consulta);
+        if ($consulta->getWebserviceIndex() == 'confirmacion_compra')
+            return $this->convertConfirmacionCompra($consulta);
+        if ($consulta->getWebserviceIndex() == 'generar_envios_de_entrega_y_retiro_con_datos_de_impresion')
+            return $this->convertGenerarEnviosDeEntregaYRetiroConDatosDeImpresion($consulta);
+        if ($consulta->getWebserviceIndex() == 'anular_envio')
+            return $this->convertAnularEnvio($consulta);
+        if ($consulta->getWebserviceIndex() == 'generar_envio_con_datos_de_impresion_y_remitente')
+            return $this->convertGenerarEnvioConDatosDeImpresionYRemitente($consulta);
     }
-    
-    protected function convertCotizacion($consulta){
-        $arguments = 
-            array(
-                'cotizacionEnvio'=>array(
-                    'CPDestino'=> $consulta->getCodigoPostal(),
-                    'Cliente'=>$consulta->getCodigoDeCliente(),
-                    'Contrato'=>$consulta->getNumeroDeContrato(),
-                    'Peso'=>$consulta->getPeso(),
-                    'SucursalRetiro'=> $consulta->getCodigoDeSucursal(),
-                    'Volumen'=>$consulta->getVolumen(),
-                    'ValorDeclarado' => $consulta->getValorDeclarado()
-                )
-            );
-        
+
+    protected function convertCotizacion($consulta) {
+        $arguments = array(
+                    'cotizacionEnvio' => array(
+                        'CPDestino' => $consulta->getCodigoPostal(),
+                        'Cliente' => $consulta->getCodigoDeCliente(),
+                        'Contrato' => $consulta->getNumeroDeContrato(),
+                        'Peso' => $consulta->getPeso(),
+                        'SucursalRetiro' => $consulta->getCodigoDeSucursal(),
+                        'Volumen' => $consulta->getVolumen(),
+                        'ValorDeclarado' => $consulta->getValorDeclarado()
+                    )
+        );
+
         return $arguments;
     }
 
-    protected function convertTrazabilidadCodificado($consulta){
+    protected function convertTrazabilidadCodificado($consulta) {
         $arguments = array(
             'ObtenerTrazabilidadCodificado' => array(
                 'NroPieza' => array(
-                    'NroPieza' => $consulta->getReferenciaExterna(), 
-                    'NroAndreani' => $consulta->getNumeroDeEnvio(), 
+                    'NroPieza' => $consulta->getReferenciaExterna(),
+                    'NroAndreani' => $consulta->getNumeroDeEnvio(),
                     'CodigoCliente' => $consulta->getCodigoDeCliente(),
                 )
             )
@@ -51,13 +61,13 @@ class SoapArgumentConverter implements ArgumentConverter{
 
         return $arguments;
     }
-    
-    protected function convertTrazabilidad($consulta){
+
+    protected function convertTrazabilidad($consulta) {
         $arguments = array(
             'ObtenerTrazabilidad' => array(
                 'Pieza' => array(
-                    'NroPieza' => $consulta->getReferenciaExterna(), 
-                    'NroAndreani' => $consulta->getNumeroDeEnvio(), 
+                    'NroPieza' => $consulta->getReferenciaExterna(),
+                    'NroAndreani' => $consulta->getNumeroDeEnvio(),
                     'CodigoCliente' => $consulta->getCodigoDeCliente(),
                 )
             )
@@ -65,18 +75,18 @@ class SoapArgumentConverter implements ArgumentConverter{
 
         return $arguments;
     }
-    
-    protected function convertImpresionConstancia($consulta){
+
+    protected function convertImpresionConstancia($consulta) {
         $arguments = array(
-            'entities'=> array(
-                'ParamImprimirConstancia'=>array('NumeroAndreani'=>$consulta->getNumeroDeEnvio())
+            'entities' => array(
+                'ParamImprimirConstancia' => array('NumeroAndreani' => $consulta->getNumeroDeEnvio())
             )
-        );   
-        
+        );
+
         return $arguments;
     }
-    
-    protected function convertEstadoDistribucion($consulta){
+
+    protected function convertEstadoDistribucion($consulta) {
         $arguments = array(
             'Consulta' => array(
                 'CodigoCliente' => $consulta->getCodigoDeCliente(),
@@ -91,7 +101,7 @@ class SoapArgumentConverter implements ArgumentConverter{
 
         return $arguments;
     }
-    
+
     protected function convertEstadoDistribucionCodificado($consulta) {
         $arguments = array(
             'EnviosConsultas' => array(
@@ -106,34 +116,34 @@ class SoapArgumentConverter implements ArgumentConverter{
         );
         return $arguments;
     }
-    
-    protected function convertSucursales($consulta){
+
+    protected function convertSucursales($consulta) {
         $arguments = array(
-            'consulta'=>array(
-                'Localidad'=>$consulta->getLocalidad(),
-                'CodigoPostal'=>$consulta->getCodigoPostal(),
-                'Provincia'=>$consulta->getProvincia()
+            'consulta' => array(
+                'Localidad' => $consulta->getLocalidad(),
+                'CodigoPostal' => $consulta->getCodigoPostal(),
+                'Provincia' => $consulta->getProvincia()
             )
         );
-        
+
         return $arguments;
     }
-    
-    protected function convertConfirmacionCompra($consulta){
+
+    protected function convertConfirmacionCompra($consulta) {
         $arguments = array(
             'compra' => array(
                 'Calle' => $consulta->getCalle(),
                 'CategoriaDistancia' => $consulta->getCategoriaDistancia(),
                 'CategoriaFacturacion' => $consulta->getCategoriaFacturacion(),
                 'CategoriaPeso' => $consulta->getCategoriaPeso(),
-                'CodigoPostalDestino' =>$consulta->getCodigoPostal(),
+                'CodigoPostalDestino' => $consulta->getCodigoPostal(),
                 'Contrato' => $consulta->getNumeroDeContrato(),
-                'Departamento' =>$consulta->getDepartamento(),
+                'Departamento' => $consulta->getDepartamento(),
                 'DetalleProductosEntrega' => $consulta->getDetalleProductosEntrega(),
                 'DetalleProductosRetiro' => $consulta->getDetalleProductosRetiro(),
                 'Email' => $consulta->getEmail(),
-                'Localidad' =>$consulta->getLocalidad(),
-                'NombreApellido' =>$consulta->getNombreYApellido(),
+                'Localidad' => $consulta->getLocalidad(),
+                'NombreApellido' => $consulta->getNombreYApellido(),
                 'NombreApellidoAlternativo' => $consulta->getNombreYApellidoAlternativo(),
                 'Numero' => $consulta->getNumero(),
                 'NumeroCelular' => $consulta->getNumeroDeCelular(),
@@ -155,56 +165,56 @@ class SoapArgumentConverter implements ArgumentConverter{
 
         return $arguments;
     }
-    
-    protected function convertGenerarEnviosDeEntregaYRetiroConDatosDeImpresion($consulta){
+
+    protected function convertGenerarEnviosDeEntregaYRetiroConDatosDeImpresion($consulta) {
         $arguments = array(
             'parametros' => array(
-                'Provincia' =>$consulta->getProvincia(),
-                'Localidad' =>$consulta->getLocalidad(),
-                'CodigoPostal' =>$consulta->getCodigoPostal(),
-                'Calle' =>$consulta->getCalle(),
-                'Numero' =>$consulta->getNumero(),
-                'Piso' =>$consulta->getPiso(),
-                'Departamento' =>$consulta->getDepartamento(),
-                'Nombre' =>$consulta->getNombre(),
-                'Apellido' =>$consulta->getApellido(),
-                'NombreAlternativo' =>$consulta->getNombreAlternativo(),
-                'ApellidoAlternativo' =>$consulta->getApellidoAlternativo(),
-                'TipoDeDocumento' =>$consulta->getTipoDeDocumento(),
-                'NumeroDeDocumento' =>$consulta->getNumeroDeDocumento(),
-                'Email' =>$consulta->getEmail(),
-                'TelefonoFijo' =>$consulta->getTelefonoFijo(),
-                'TelefonoCelular' =>$consulta->getTelefonoCelular(),
+                'Provincia' => $consulta->getProvincia(),
+                'Localidad' => $consulta->getLocalidad(),
+                'CodigoPostal' => $consulta->getCodigoPostal(),
+                'Calle' => $consulta->getCalle(),
+                'Numero' => $consulta->getNumero(),
+                'Piso' => $consulta->getPiso(),
+                'Departamento' => $consulta->getDepartamento(),
+                'Nombre' => $consulta->getNombre(),
+                'Apellido' => $consulta->getApellido(),
+                'NombreAlternativo' => $consulta->getNombreAlternativo(),
+                'ApellidoAlternativo' => $consulta->getApellidoAlternativo(),
+                'TipoDeDocumento' => $consulta->getTipoDeDocumento(),
+                'NumeroDeDocumento' => $consulta->getNumeroDeDocumento(),
+                'Email' => $consulta->getEmail(),
+                'TelefonoFijo' => $consulta->getTelefonoFijo(),
+                'TelefonoCelular' => $consulta->getTelefonoCelular(),
                 'CategoriaPeso' => $consulta->getCategoriaPeso(),
-                'Peso' =>$consulta->getPeso(),
-                'DetalleDeProductosAEntregar' =>$consulta->getDetalleDeProductosAEntregar(),
-                'DetalleDeProductosARetirar' =>$consulta->getDetalleDeProductosARetirar(),
+                'Peso' => $consulta->getPeso(),
+                'DetalleDeProductosAEntregar' => $consulta->getDetalleDeProductosAEntregar(),
+                'DetalleDeProductosARetirar' => $consulta->getDetalleDeProductosARetirar(),
                 'Volumen' => $consulta->getVolumen(),
                 'ValorDeclaradoConIva' => $consulta->getValorDeclaradoConIva(),
                 'Contrato' => $consulta->getContrato(),
                 'IdCliente' => $consulta->getIdCliente(),
-                'SucursalDeRetiro' =>$consulta->getSucursalDeRetiro(),
-                'SucursalDelCliente' =>$consulta->getSucursalDelCliente()
+                'SucursalDeRetiro' => $consulta->getSucursalDeRetiro(),
+                'SucursalDelCliente' => $consulta->getSucursalDelCliente()
             )
         );
 
         return $arguments;
     }
-    
-    public function convertAnularEnvio($consulta){
+
+    public function convertAnularEnvio($consulta) {
         $arguments = array(
-            'envios'=> array(
-                'ParamAnularEnvios'=>array('NumeroAndreani'=>$consulta->getNumeroDeEnvio())
+            'envios' => array(
+                'ParamAnularEnvios' => array('NumeroAndreani' => $consulta->getNumeroDeEnvio())
             )
-        );   
-        
+        );
+
         return $arguments;
     }
-    
+
     protected function convertGenerarEnvioConDatosDeImpresionYRemitente($consulta) {
-        
+
         //  Datos del destinatario
-        
+
         $destinatario = array(
             'apellido' => $consulta->getApellidoDestinatario(),
             'apellidoAlternativo' => $consulta->getApellidoAlternativoDestinatario(),
@@ -238,7 +248,7 @@ class SoapArgumentConverter implements ArgumentConverter{
             }
         }
         //  Datos del destino
-        
+
         $destino = array(
             'calle' => $consulta->getCalleDestino(),
             'departamento' => $consulta->getDepartamentoDestino(),
@@ -253,9 +263,9 @@ class SoapArgumentConverter implements ArgumentConverter{
         if ($consulta->getCodigoPostalDestino() != null) {
             $destino["codigoPostal"] = $consulta->getCodigoPostalDestino();
         }
-        
+
         //  Datos del Remitente 
-        
+
         $remitente = array(
             'apellido' => $consulta->getApellidoRemitente(),
             'apellidoAlternativo' => $consulta->getApellidoAlternativoRemitente(),
@@ -263,11 +273,11 @@ class SoapArgumentConverter implements ArgumentConverter{
             'nombreAlternativo' => $consulta->getNombreAlternativoRemitente(),
             'telefonos' => array(
                 'Telefono' => array(
-                    'numero' => intval($consulta->getTelefonoFijoRemitente()? : 0),
+                    'numero' => intval($consulta->getTelefonoFijoRemitente() ?: 0),
                     'tipo' => "casa"
                 ),
                 'Telefono' => array(
-                    'numero' => intval($consulta->getTelefonoCelularRemitente()? : 0),
+                    'numero' => intval($consulta->getTelefonoCelularRemitente() ?: 0),
                     'tipo' => "movil"
                 )
             ),
@@ -283,9 +293,9 @@ class SoapArgumentConverter implements ArgumentConverter{
         if ($consulta->getMailRemitente() != null) {
             $remitente["email"] = $consulta->getMailRemitente();
         }
-        
+
         //  Datos del origen
-        
+
         $origen = array(
             'calle' => $consulta->getCalleOrigen(),
             'departamento' => $consulta->getDepartamentoOrigen(),
@@ -301,7 +311,7 @@ class SoapArgumentConverter implements ArgumentConverter{
             $origen["codigoPostal"] = $consulta->getCodigoPostalOrigen();
         }
         //  Argumentos a enviar al web service
-        
+
         $arguments = array(
             'parametros' => array(
                 'contrato' => $consulta->getContrato(),
@@ -326,8 +336,8 @@ class SoapArgumentConverter implements ArgumentConverter{
         if ($consulta->getSucursalDeRetiro() != null) {
             $arguments["parametros"]["sucursalDeRetiro"] = intval($consulta->getSucursalDeRetiro());
         }
-        
+
         return $arguments;
     }
-    
+
 }
