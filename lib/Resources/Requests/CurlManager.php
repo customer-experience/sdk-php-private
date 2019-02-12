@@ -1,6 +1,6 @@
 <?php
 
-namespace Request;
+namespace Resources\Requests;
 
 class CurlManager {
 
@@ -22,12 +22,13 @@ class CurlManager {
         return $this->curl ? $this->curl : $this->initCurl();
     }
 
-    protected function getJson($url, $headersArray) {
+    public function getJson($url, $headersArray, $USERPWD) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($this->curl, CURLOPT_TIMEOUT, 7);
         curl_setopt($this->curl, CURLOPT_VERBOSE, 0);
+        curl_setopt($this->curl, CURLOPT_USERPWD, $USERPWD);
         curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->curl, CURLOPT_HEADER, 1);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
@@ -43,7 +44,7 @@ class CurlManager {
         return array("code" => $code, "body" => $body, "header" => $this->getHeadersFromResponse($header));
     }
 
-    protected function postJson($url, $data, $headersArray) {
+    public function postJson($url, $data, $headersArray) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -66,7 +67,7 @@ class CurlManager {
         return array("code" => $code, "body" => $body, "header" => $this->getHeadersFromResponse($header));
     }
 
-    protected function putJson($url, $data, $headersArray) {
+    public function putJson($url, $data, $headersArray) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -89,7 +90,7 @@ class CurlManager {
         return array("code" => $code, "body" => $body, "header" => $this->getHeadersFromResponse($header));
     }
 
-    protected function deleteJson($url, $headersArray) {
+    public function deleteJson($url, $headersArray) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);

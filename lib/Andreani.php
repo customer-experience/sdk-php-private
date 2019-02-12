@@ -1,5 +1,7 @@
 <?php
 
+use Resources\Requests\ApiClient;
+
 class Andreani {
 
     protected $username;
@@ -12,21 +14,26 @@ class Andreani {
         $this->environment = $environment == 'prod' ? 'Production' : 'Sandbox';
     }
 
-    public function call(WebserviceRequest $consulta) {
+    public function call() {
         return 1;
     }
 
-    protected function getAuthorizationToken() {
-        $environment = new $this->environment();
-        $url = $environment->getLogin();
+    public function getAuthorizationToken() {
         $apiClient = new ApiClient();
-        $content = $apiClient->getJson($url);
-        $authorizationToken = $content['ok'];
+        $environment = $this->getEnvironmentClass();
+        $url = $environment->getLogin();
+        $content = $apiClient->getJson($url, null, "$this->username:$this->password");
+        $authorizationToken = $content['header']['X-Authorization-token'];
         return $authorizationToken;
     }
 
     public function getEnvironment() {
         return $this->environment;
+    }
+
+    protected function getEnvironmentClass() {
+        $environmentClassName = '\\Resources\\Environment\\' . $this->environment;
+        return new $environmentClassName() ;
     }
 
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Request;
+namespace Resources\Requests;
 
-use Request\CurlManager;
+use Resources\Requests\CurlManager;
 
 class ApiClient extends CurlManager {
 
-    public function getEntity($url, $headersArray = null) {
+    public function getEntity($url, $headersArray = null, $USERPWD) {
         return $this->getJson($url, $headersArray);
     }
 

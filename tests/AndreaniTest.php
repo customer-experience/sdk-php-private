@@ -22,4 +22,16 @@ final class AndreaniTest extends TestCase {
         $this->assertEquals($andreani->getEnvironment(), 'Sandbox');
     }
 
+    public function testGetAuthorizationTokenProd(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
+        $authorizationToken = $andreani->getAuthorizationToken();
+        $this->assertTrue(strlen($authorizationToken) > 1000);
+    }
+
+    public function testGetAuthorizationTokenSandbox(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'sandbox');
+        $authorizationToken = $andreani->getAuthorizationToken();
+        $this->assertTrue(strlen($authorizationToken) > 1000);
+    }
+
 }
