@@ -1,13 +1,15 @@
 <?php
 
+namespace Resources\Environment;
+
 abstract class Environment {
     
     function __construct() {
-       $this->config = json_decode(file_get_contents(__DIR__ . '/config.json'));
+       $this->config = json_decode(file_get_contents(__DIR__ . '/../../config.json'));
    }
     
-    abstract protected function getLogin();
+    abstract public function getLogin();
 
-    abstract protected function getMetodos();
+    abstract public function getMetodos();
 
 }
