@@ -8,8 +8,12 @@ class Production extends Environment {
         return $this->config->production->login;
     }
 
-    public function getMetodos() {
-        return $this->metodos;
+    public function getMethods() {
+        return $this->config->production->methods;
+    }
+
+    public function getName() {
+        return 'Production';
     }
 
 }

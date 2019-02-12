@@ -10,6 +10,8 @@ abstract class Environment {
     
     abstract public function getLogin();
 
-    abstract public function getMetodos();
+    abstract public function getMethods();
+    
+    abstract public function getName();
 
 }

@@ -1,6 +1,11 @@
 {   
     "production": {
-        "login": "https://api.andreani.com/login"
+        "login": "https://api.andreani.com/login",
+        "methods": {
+            "EnvioConNumeroAndreani": {
+                "parameters": ["NumeroAndreani"]
+            }
+        }
     },
     "sandbox": {
         "login": "https://api.qa.andreani.com/login"

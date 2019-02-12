@@ -11,7 +11,8 @@ class Andreani {
     public function __construct($username, $password, $environment = 'prod') {
         $this->username = $username;
         $this->password = $password;
-        $this->environment = $environment == 'prod' ? 'Production' : 'Sandbox';
+        $environmentClassName = '\\Resources\\Environment\\' . ($environment == 'prod' ? 'Production' : 'Sandbox');
+        $this->environment = new $environmentClassName();
     }
 
     public function call() {
@@ -20,20 +21,18 @@ class Andreani {
 
     public function getAuthorizationToken() {
         $apiClient = new ApiClient();
-        $environment = $this->getEnvironmentClass();
-        $url = $environment->getLogin();
+        $url = $this->environment->getLogin();
         $content = $apiClient->getJson($url, null, "$this->username:$this->password");
         $authorizationToken = $content['header']['X-Authorization-token'];
         return $authorizationToken;
     }
 
-    public function getEnvironment() {
-        return $this->environment;
+    public function getMethods() {
+        return $this->environment->getMethods();
     }
 
-    protected function getEnvironmentClass() {
-        $environmentClassName = '\\Resources\\Environment\\' . $this->environment;
-        return new $environmentClassName() ;
+    public function getEnvironment() {
+        return $this->environment->getName();
     }
 
 }
