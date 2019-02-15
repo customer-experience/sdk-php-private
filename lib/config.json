@@ -1,4 +1,0 @@
-{   
-    "production": "https://api.andreani.com/login",
-    "sandbox": "https://api.qa.andreani.com/login"
-}

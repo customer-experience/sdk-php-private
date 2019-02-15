@@ -13,8 +13,14 @@ class Andreani {
         $this->environment = new $environmentClassName();
     }
 
-    public function call() {
-        return 1;
+    public function call($method, $parameters) {
+        $autorizationToken = $this->getAuthorizationToken();
+        $response = $this->environment->callMethod($method, $parameters, $autorizationToken);
+        return $response;
+    }
+
+    public function getConfiguration() {
+        return $this->getMethodParameters();
     }
 
     public function getAuthorizationToken() {
@@ -23,6 +29,10 @@ class Andreani {
         $content = $apiClient->getJson($url, null, "$this->username:$this->password");
         $authorizationToken = $content['header']['X-Authorization-token'];
         return $authorizationToken;
+    }
+
+    public function getMethodParameters() {
+        return $this->environment->getMethodParameters();
     }
 
     public function getMethods() {

@@ -4,12 +4,10 @@ namespace Resources\Environment;
 
 class Production extends Environment {
 
-    public function getLogin() {
-        return $this->config->production;
-    }
+    const LOGIN = 'https://api.andreani.com/login';
 
-    public function getMethods() {
-        return array();
+    public function getLogin() {
+        return self::LOGIN;
     }
 
     public function getName() {
