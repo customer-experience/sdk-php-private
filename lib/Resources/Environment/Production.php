@@ -5,11 +5,11 @@ namespace Resources\Environment;
 class Production extends Environment {
 
     public function getLogin() {
-        return $this->config->production->login;
+        return $this->config->production;
     }
 
     public function getMethods() {
-        return $this->config->production->methods;
+        return array();
     }
 
     public function getName() {

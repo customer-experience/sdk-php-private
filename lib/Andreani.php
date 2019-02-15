@@ -1,7 +1,5 @@
 <?php
 
-use Resources\Requests\ApiClient;
-
 class Andreani {
 
     protected $username;

@@ -1,7 +1,5 @@
 <?php
 
-namespace Resources\Requests;
-
 class CurlManager {
 
     public function __construct() {

@@ -1,23 +1,4 @@
 {   
-    "production": {
-        "login": "https://api.andreani.com/login",
-        "methods": {
-            "EnvioConNumeroAndreani": {
-                "parameters": ["NumeroAndreani"]
-            }
-        }
-    },
-    "sandbox": {
-        "login": "https://api.qa.andreani.com/login"
-    },
-    "webservices": {
-        "prod": {
-            "cotizacion": {
-                "url": "https://cotizador.andreani.com/ws?wsdl",
-                "method": "CotizarEnvio",
-                "headers": ["auth"],
-                "message_type": "external"
-            }
-        }
-    }
+    "production": "https://api.andreani.com/login",
+    "sandbox": "https://api.qa.andreani.com/login"
 }

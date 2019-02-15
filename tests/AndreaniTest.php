@@ -34,18 +34,24 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(strlen($authorizationToken) > 1000);
     }
 
-    // config.json dir
+    public function testDirectoryExists() {
+        $this->assertTrue(file_exists('lib/config.json'));
+    }
 
     public function testGetMethodsSandbox(): void {
         $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'sandbox');
         $methods = $andreani->getMethods();
-        $this->assertEquals(gettype($methods), 'object');
+        $this->assertEquals(gettype($methods), 'array');
     }
 
     public function testGetMethodsProd(): void {
         $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
         $methods = $andreani->getMethods();
-        $this->assertEquals(gettype($methods), 'object');
+        $this->assertEquals(gettype($methods), 'array');
     }
-    
+
+    public function testScanDir(): void {
+        $this->assertTrue(scandir('lib/Resources/Methods'));
+    }
+
 }

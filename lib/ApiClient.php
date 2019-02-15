@@ -1,9 +1,5 @@
 <?php
 
-namespace Resources\Requests;
-
-use Resources\Requests\CurlManager;
-
 class ApiClient extends CurlManager {
 
     public function getEntity($url, $headersArray = null, $USERPWD) {

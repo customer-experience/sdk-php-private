@@ -5,11 +5,11 @@ namespace Resources\Environment;
 class Sandbox extends Environment {
 
     public function getLogin() {
-        return $this->config->sandbox->login;
+        return $this->config->sandbox;
     }
 
     public function getMethods() {
-        return $this->config->production->methods;
+        return array();
     }
 
     public function getName() {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Resources\Requests;
+namespace Resources\Methods;
 
 class EnvioConNumeroAndreani {
     
