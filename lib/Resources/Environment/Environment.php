@@ -10,6 +10,8 @@ abstract class Environment {
     }
 
     abstract public function getLogin();
+    
+    abstract public function getURL();
 
     abstract public function getName();
 
@@ -39,7 +41,7 @@ abstract class Environment {
     public function callMethod($method, $parameters, $autorizationToken) {
         $classname = 'Resources\\Methods\\' . $this->getName() . '\\' . $method;
         $class = new $classname();
-        return $class->callParameters($parameters, $autorizationToken, $this->getLogin());
+        return $class->callParameters($parameters, $autorizationToken, $this->getURL());
     }
 
 }

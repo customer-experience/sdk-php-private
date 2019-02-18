@@ -3,6 +3,7 @@
 namespace Resources\Methods\Production;
 
 use Resources\Methods\ProductionInterface;
+use ApiClient;
 
 class EnvioConNumeroAndreani implements ProductionInterface {
 
@@ -10,9 +11,9 @@ class EnvioConNumeroAndreani implements ProductionInterface {
         return array("NumeroAndreani");
     }
 
-    public function callParameters($parameters, $autorizationToken, $login) {
+    public function callParameters($parameter, $autorizationToken, $url) {
         $apiClient = new ApiClient();
-        return $apiClient->getJson($login, $parameters, array('x-Authorization-token' => $autorizationToken));
+        return $apiClient->getJson($url . 'v1/envios/' . $parameter, null, 'x-Authorization-token:' . $autorizationToken);
     }
 
 }

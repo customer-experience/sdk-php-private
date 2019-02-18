@@ -4,10 +4,14 @@ namespace Resources\Environment;
 
 class Production extends Environment {
 
-    const LOGIN = 'https://api.andreani.com/login';
+    const URL = 'https://api.andreani.com/';
 
     public function getLogin() {
-        return self::LOGIN;
+        return self::URL . 'login';
+    }
+
+    public function getURL() {
+        return self::URL;
     }
 
     public function getName() {

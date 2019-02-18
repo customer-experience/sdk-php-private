@@ -70,4 +70,10 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(sizeof($methods) > 1);
     }
 
+//    public function testCallProd(): void {
+//        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
+//        $methods = $andreani->call('EnvioConNumeroAndreani', 'G00000302460730');
+//        $this->assertTrue(gettype($methods) == 'json');
+//    }
+
 }

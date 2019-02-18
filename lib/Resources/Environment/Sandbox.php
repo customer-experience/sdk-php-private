@@ -4,12 +4,16 @@ namespace Resources\Environment;
 
 class Sandbox extends Environment {
 
-    const LOGIN = 'https://api.qa.andreani.com/login';
+    const URL = 'https://api.qa.andreani.com/';
 
     public function getLogin() {
-        return self::LOGIN;
+        return self::URL . 'login';
     }
-
+    
+    public function getURL() {
+        return self::URL;
+    }
+    
     public function getName() {
         return 'Sandbox';
     }
