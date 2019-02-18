@@ -3,6 +3,7 @@
 namespace Resources\Methods\Sandbox;
 
 use Resources\Methods\SandboxInterface;
+use ApiClient;
 
 class EnvioConNumeroAndreani implements SandboxInterface {
 
@@ -12,7 +13,7 @@ class EnvioConNumeroAndreani implements SandboxInterface {
 
     public function callParameters($parameter, $autorizationToken, $url) {
         $apiClient = new ApiClient();
-        return $apiClient->getJson($url . 'v1/envios/' . $parameter, null, 'x-Authorization-token:' . $autorizationToken);
+        return $apiClient->getJson($url . 'v1/envios/' . $parameter['NumeroAndreani'], null, 'x-Authorization-token:' . $autorizationToken);
     }
 
 }

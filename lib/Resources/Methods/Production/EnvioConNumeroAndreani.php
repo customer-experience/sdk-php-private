@@ -13,7 +13,7 @@ class EnvioConNumeroAndreani implements ProductionInterface {
 
     public function callParameters($parameter, $autorizationToken, $url) {
         $apiClient = new ApiClient();
-        return $apiClient->getJson($url . 'v1/envios/' . $parameter, null, 'x-Authorization-token:' . $autorizationToken);
+        return $apiClient->getJson($url . 'v1/envios/' . $parameter['NumeroAndreani'], array('x-Authorization-token' => $autorizationToken), null);
     }
 
 }

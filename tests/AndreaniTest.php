@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use ApiClient;
 
 final class AndreaniTest extends TestCase {
 
@@ -70,10 +71,40 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(sizeof($methods) > 1);
     }
 
-//    public function testCallProd(): void {
-//        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
-//        $methods = $andreani->call('EnvioConNumeroAndreani', 'G00000302460730');
-//        $this->assertTrue(gettype($methods) == 'json');
-//    }
+    public function testCallProdEnvioConNumeroAndreani(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
+        $methods = $andreani->call('EnvioConNumeroAndreani', ['NumeroAndreani' => 'G00000302460730']);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    public function testCallSandroxEnvioConNumeroAndreani(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'sandbox');
+        $methods = $andreani->call('EnvioConNumeroAndreani', ['NumeroAndreani' => 'G00000302460730']);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    public function testCallProdTrazaConNumeroAndreani(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
+        $methods = $andreani->call('TrazaConNumeroAndreani', ['NumeroAndreani' => 'G00000302460730']);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    public function testCallSandroxTrazaConNumeroAndreani(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'sandbox');
+        $methods = $andreani->call('TrazaConNumeroAndreani', ['NumeroAndreani' => 'G00000302460730']);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    public function testCallProdEnvioConParametros(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
+        $methods = $andreani->call('EnvioConParametros', ['codigoCliente' => 'CL0003750', 'fechaCreacionDesde' => '2018-01-01T00:00:00', 'fechaCreacionHasta' => '2018-06-30T23:59:59', 'idDeProducto' => 'aldanois9987', 'numeroDeDocumentoDestinatario' => null]);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    public function testCallSandroxEnvioConParametros(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'sandbox');
+        $methods = $andreani->call('EnvioConParametros', ['codigoCliente' => 'CL0003750', 'fechaCreacionDesde' => '2018-01-01T00:00:00', 'fechaCreacionHasta' => '2018-06-30T23:59:59', 'idDeProducto' => 'aldanois9987', 'numeroDeDocumentoDestinatario' => null]);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
 
 }
