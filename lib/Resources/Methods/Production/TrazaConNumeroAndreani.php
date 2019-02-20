@@ -3,6 +3,7 @@
 namespace Resources\Methods\Production;
 
 use Resources\Methods\ProductionInterface;
+use ApiClient;
 
 class TrazaConNumeroAndreani implements ProductionInterface {
 

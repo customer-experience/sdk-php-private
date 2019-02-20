@@ -1,7 +1,6 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use ApiClient;
 
 final class AndreaniTest extends TestCase {
 
@@ -71,6 +70,8 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(sizeof($methods) > 1);
     }
 
+    //////////////////// METHODS ////////////////////
+    
     public function testCallProdEnvioConNumeroAndreani(): void {
         $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
         $methods = $andreani->call('EnvioConNumeroAndreani', ['NumeroAndreani' => 'G00000302460730']);
@@ -107,4 +108,13 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(gettype($methods) == 'array');
     }
 
-}
+    public function testCallSandroxCotizar(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'sandbox');
+        $methods = $andreani->call('Cotizar', ["pais" => "Argentina", "region" => "Argentina", "localidad" => "Argentina", "codigoPostal" => "Argentina", "sucursalOrigen" => "Argentina", "contrato" => "Argentina", "kilos" => "Argentina", "categoria" => "Argentina", "altoCm" => "Argentina", "largoCm" => "Argentina", "anchoCm" => "Argentina", "volumen" => "Argentina", "valorDeclarado" => "Argentina"]);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    // Obtener una etiqueta para imprimir
+    // Crear una nueva orden
+    
+    }
