@@ -15,12 +15,14 @@ class Cotizar implements SandboxInterface {
         $apiClient = new ApiClient();
         $url .= 'v1/tarifas?';
 
-        if (!array_key_exists('pais', $parameter) || !array_key_exists('codigoPostal', $parameter) || !array_key_exists('contrato', $parameter) || !array_key_exists('volumen', $parameter) || !array_key_exists('valorDeclarado', $parameter)) {
-            if (!array_key_exists('kilos', $parameter) && !array_key_exists('categoria', $parameter)) {
-                return "Faltan ingresar kilos o categoría !";
+        if (array_key_exists('pais', $parameter) && array_key_exists('codigoPostal', $parameter) && array_key_exists('contrato', $parameter) && array_key_exists('volumen', $parameter) && array_key_exists('valorDeclarado', $parameter)) {
+            if (array_key_exists('kilos', $parameter) || array_key_exists('categoria', $parameter)) {
+                // Camino feliz
             } else {
-                return "Faltan datos obligatorios";
+                return "Faltan ingresar kilos o categoría !";
             }
+        } else {
+            return "Faltan datos obligatorios";
         }
 
         $url .= 'Destino={"pais": "' . $parameter['pais'] . '", "codigoPostal": "' . $parameter['codigoPostal'] . '"';
@@ -49,7 +51,7 @@ class Cotizar implements SandboxInterface {
 
         $url .= '}';
 
-        return $apiClient->getJson($url, null, 'x-Authorization-token:' . $autorizationToken);
+        return $apiClient->getJson($url, 'x-Authorization-token:' . $autorizationToken, null);
     }
 
 }

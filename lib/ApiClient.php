@@ -6,7 +6,7 @@ class ApiClient extends CurlManager {
         return $this->getJson($url, $headersArray);
     }
 
-    public function postEntity($url, $data = null, $headersArray = null) {
+    public function postEntity($url, $data = null, $headersArray = null, $USERPWD) {
         return $this->postJson($url, $data, $headersArray);
     }
 

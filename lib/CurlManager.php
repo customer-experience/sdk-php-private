@@ -42,12 +42,13 @@ class CurlManager {
         return array("code" => $code, "body" => $body, "header" => $this->getHeadersFromResponse($header));
     }
 
-    public function postJson($url, $data, $headersArray) {
+    public function postJson($url, $data, $headersArray, $USERPWD) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($this->curl, CURLOPT_TIMEOUT, 7);
         curl_setopt($this->curl, CURLOPT_VERBOSE, 0);
+        curl_setopt($this->curl, CURLOPT_USERPWD, $USERPWD);
         curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->curl, CURLOPT_HEADER, 1);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);

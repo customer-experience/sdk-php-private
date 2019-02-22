@@ -41,11 +41,6 @@ abstract class Environment {
     public function callMethod($method, $parameters, $autorizationToken) {
         $classname = 'Resources\\Methods\\' . $this->getName() . '\\' . $method;
         $class = new $classname();
-
-        if ($method == "Cotizar") {
-            var_dump($class->callParameters($parameters, $autorizationToken, $this->getURL()));
-            exit;
-        }
         return $class->callParameters($parameters, $autorizationToken, $this->getURL());
     }
 
