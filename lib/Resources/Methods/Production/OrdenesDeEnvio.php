@@ -3,7 +3,7 @@
 namespace Resources\Methods\Production;
 
 use Resources\Methods\ProductionInterface;
-use ApiClient;
+use CurlManager;
 
 class OrdenesDeEnvio implements ProductionInterface {
 
@@ -12,8 +12,8 @@ class OrdenesDeEnvio implements ProductionInterface {
     }
 
     public function callParameters($parameter, $autorizationToken, $url) {
-        $apiClient = new ApiClient();
-        return $apiClient->postJson($url . 'v1/ordenesDeEnvio', array('x-Authorization-token' => $autorizationToken), null, 'x-Authorization-token:' . $autorizationToken);
+        $curlManager = new CurlManager();
+        return $curlManager->postJson($url . 'v1/ordenesDeEnvio', array('x-Authorization-token' => $autorizationToken), null, 'x-Authorization-token:' . $autorizationToken);
     }
 
 }

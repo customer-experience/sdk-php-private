@@ -24,9 +24,9 @@ class Andreani {
     }
 
     public function getAuthorizationToken() {
-        $apiClient = new ApiClient();
+        $curlManager = new CurlManager();
         $url = $this->environment->getLogin();
-        $content = $apiClient->getJson($url, null, "$this->username:$this->password");
+        $content = $curlManager->getJson($url, null, "$this->username:$this->password");
         $authorizationToken = $content['header']['X-Authorization-token'];
         return $authorizationToken;
     }

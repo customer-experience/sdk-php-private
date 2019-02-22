@@ -20,6 +20,15 @@ class CurlManager {
         return $this->curl ? $this->curl : $this->initCurl();
     }
 
+    /*
+     * {Headers array example}
+     * 
+     * ['Content-Type'] => 'application/xml',
+     * ['Accept'] => 'application/json',
+     * ...
+     * 
+     */
+
     public function getJson($url, $headersArray, $USERPWD) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
@@ -66,12 +75,13 @@ class CurlManager {
         return array("code" => $code, "body" => $body, "header" => $this->getHeadersFromResponse($header));
     }
 
-    public function putJson($url, $data, $headersArray) {
+    public function putJson($url, $data, $headersArray, $USERPWD) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($this->curl, CURLOPT_TIMEOUT, 7);
         curl_setopt($this->curl, CURLOPT_VERBOSE, 0);
+        curl_setopt($this->curl, CURLOPT_USERPWD, $USERPWD);
         curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->curl, CURLOPT_HEADER, 1);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
@@ -89,12 +99,13 @@ class CurlManager {
         return array("code" => $code, "body" => $body, "header" => $this->getHeadersFromResponse($header));
     }
 
-    public function deleteJson($url, $headersArray) {
+    public function deleteJson($url, $headersArray, $USERPWD) {
         $this->initCurl();
         curl_setopt($this->curl, CURLOPT_URL, $url);
         curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($this->curl, CURLOPT_TIMEOUT, 7);
         curl_setopt($this->curl, CURLOPT_VERBOSE, 0);
+        curl_setopt($this->curl, CURLOPT_USERPWD, $USERPWD);
         curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->curl, CURLOPT_HEADER, 1);
         curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);

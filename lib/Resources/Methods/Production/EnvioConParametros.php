@@ -3,7 +3,7 @@
 namespace Resources\Methods\Production;
 
 use Resources\Methods\ProductionInterface;
-use ApiClient;
+use CurlManager;
 
 class EnvioConParametros implements ProductionInterface {
 
@@ -12,7 +12,7 @@ class EnvioConParametros implements ProductionInterface {
     }
 
     public function callParameters($parameter, $autorizationToken, $url) {
-        $apiClient = new ApiClient();
+        $curlManager = new CurlManager();
         $url .= 'v1/envios?';
         if ($parameter['codigoCliente'])
             $url .= 'codigoCliente' . '=' . $parameter['codigoCliente'] . '&';
@@ -25,7 +25,7 @@ class EnvioConParametros implements ProductionInterface {
         if ($parameter['numeroDeDocumentoDestinatario'])
             $url .= 'numeroDeDocumentoDestinatario' . '=' . $parameter['numeroDeDocumentoDestinatario'] . '&';
 
-        return $apiClient->getJson($url, null, 'x-Authorization-token:' . $autorizationToken);
+        return $curlManager->getJson($url, null, 'x-Authorization-token:' . $autorizationToken);
     }
 
 }

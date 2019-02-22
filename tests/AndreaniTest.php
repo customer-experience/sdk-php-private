@@ -126,4 +126,6 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(gettype($methods) == 'array');
     }
 
+    //////////////////// METHODS ////////////////////
+    ////////////////////// END //////////////////////
 }

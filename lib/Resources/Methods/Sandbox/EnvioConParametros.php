@@ -3,7 +3,7 @@
 namespace Resources\Methods\Sandbox;
 
 use Resources\Methods\SandboxInterface;
-use ApiClient;
+use CurlManager;
 
 class EnvioConParametros implements SandboxInterface {
 
@@ -12,7 +12,7 @@ class EnvioConParametros implements SandboxInterface {
     }
 
     public function callParameters($parameter, $autorizationToken, $url) {
-        $apiClient = new ApiClient();
+        $curlManager = new CurlManager();
         $url .= 'v1/envios?';
         if ($parameter['codigoCliente'])
             $url .= 'codigoCliente' . '=' . $parameter['codigoCliente'] . '&';
@@ -25,7 +25,7 @@ class EnvioConParametros implements SandboxInterface {
         if ($parameter['numeroDeDocumentoDestinatario'])
             $url .= 'numeroDeDocumentoDestinatario' . '=' . $parameter['numeroDeDocumentoDestinatario'] . '&';
 
-        return $apiClient->getJson($url, null, 'x-Authorization-token:' . $autorizationToken);
+        return $curlManager->getJson($url, null, 'x-Authorization-token:' . $autorizationToken);
     }
 
 }

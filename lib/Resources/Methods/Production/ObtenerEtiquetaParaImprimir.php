@@ -3,7 +3,7 @@
 namespace Resources\Methods\Production;
 
 use Resources\Methods\ProductionInterface;
-use ApiClient;
+use CurlManager;
 
 class ObtenerEtiquetaParaImprimir implements ProductionInterface {
 
@@ -12,8 +12,8 @@ class ObtenerEtiquetaParaImprimir implements ProductionInterface {
     }
 
     public function callParameters($parameter, $autorizationToken, $url) {
-        $apiClient = new ApiClient();
-        return $apiClient->getJson($url . 'v1/etiquetas', array('x-Authorization-token' => $autorizationToken), null);
+        $curlManager = new CurlManager();
+        return $curlManager->getJson($url . 'v1/etiquetas', array('x-Authorization-token' => $autorizationToken), null);
     }
 
 }

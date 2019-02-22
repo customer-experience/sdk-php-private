@@ -3,7 +3,7 @@
 namespace Resources\Methods\Sandbox;
 
 use Resources\Methods\SandboxInterface;
-use ApiClient;
+use CurlManager;
 
 class Cotizar implements SandboxInterface {
 
@@ -12,7 +12,7 @@ class Cotizar implements SandboxInterface {
     }
 
     public function callParameters($parameter, $autorizationToken, $url) {
-        $apiClient = new ApiClient();
+        $curlManager = new CurlManager();
         $url .= 'v1/tarifas?';
 
         if (array_key_exists('pais', $parameter) && array_key_exists('codigoPostal', $parameter) && array_key_exists('contrato', $parameter) && array_key_exists('volumen', $parameter) && array_key_exists('valorDeclarado', $parameter)) {
@@ -51,7 +51,7 @@ class Cotizar implements SandboxInterface {
 
         $url .= '}';
 
-        return $apiClient->getJson($url, 'x-Authorization-token:' . $autorizationToken, null);
+        return $curlManager->getJson($url, 'x-Authorization-token:' . $autorizationToken, null);
     }
 
 }
