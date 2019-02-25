@@ -8,30 +8,15 @@ use CurlManager;
 class OrdenesDeEnvio implements ProductionInterface {
 
     public function getParameters() {
-        return array("localidad", "region", "pais", "codigoPostal", "componentesDeDireccion" => array("meta" => "calle/numero", "contenido"), "nombres", "apellidos", "tipoYNumeroDeDocumento", "email", "contrato", "bultosParaEnviar" => array("kilos", "valorDeclaradoConImpuesto", "descripcionPaquete", "IDdeProducto", "largoCM", "altoCM", "anchoCM"));
+        return array("localidad", "region", "pais", "codigoPostal", "componentesDeDireccion" => array("meta" => "calle/numero", "contenido"), "nombres", "apellidos", "tipoYNumeroDeDocumento", "eMail", "contrato", "bultosParaEnviar" => array("kilos", "valorDeclaradoConImpuestos", "descripcion", "IdDeProducto", "largoCm", "altoCm", "anchoCm"));
     }
-
-    /*
-     *
-     * Region
-     * Pais
-     * kilos
-     * valorDeclaradoConImpuestos
-     * EMAIL o NOMBREAPELLIDO
-     * dni
-     * descripcion
-     * id
-     * anchoi
-     * largo
-     * alto
-     * 
-     */
 
     public function callParameters($parameter, $autorizationToken, $url) {
         $curlManager = new CurlManager();
 
+
         if (array_key_exists('localidad', $parameter) && array_key_exists('codigoPostal', $parameter) && array_key_exists('bultosParaEnviar', $parameter) && array_key_exists('componentesDeDireccion', $parameter) && array_key_exists('contrato', $parameter) && array_key_exists('kilos', $parameter) && array_key_exists('valorDeclaradoConImpuesto', $parameter)) {
-            if (array_key_exists('email', $parameter) || (array_key_exists('nombres', $parameter) && array_key_exists('apellidos', $parameter))) {
+            if (array_key_exists('eMail', $parameter) || (array_key_exists('nombres', $parameter) && array_key_exists('apellidos', $parameter))) {
                 // Camino feliz
             } else {
                 return "Faltan ingresar el Email o el Nombre y Apellido !";
@@ -40,12 +25,11 @@ class OrdenesDeEnvio implements ProductionInterface {
             return "Faltan datos obligatorios";
         }
 
-
         $json = '"destino": {"postal": {"localidad": "' . $parameter['localidad'] . '", "codigoPostal": "' . $parameter['codigoPostal'] . '" ';
-        if ($parameter['region']) {
+        if (array_key_exists('region', $parameter)) {
             $json .= ', "region": "' . $parameter['region'] . '" ';
         }
-        if ($parameter['pais']) {
+        if (array_key_exists('pais', $parameter)) {
             $json .= ', "pais": "' . $parameter['pais'] . '" ';
         }
         $json .= ', "componentesDeDireccion": [';
@@ -53,43 +37,43 @@ class OrdenesDeEnvio implements ProductionInterface {
             $json .= '{"meta": "' . $componente['meta'] . '", "contenido": "' . $componente['contenido'] . '"},';
         }
         $json .= ']}}, "destinatario": {';
-        if ($parameter['nombres']) {
+        if (array_key_exists('nombres', $parameter)) {
             $json .= ', "nombres": "' . $parameter['nombres'] . '" ';
         }
-        if ($parameter['apellidos']) {
+        if (array_key_exists('apellidos', $parameter)) {
             $json .= ', "apellidos": "' . $parameter['apellidos'] . '" ';
         }
-        if ($parameter['tipoYNumeroDeDocumento']) {
+        if (array_key_exists('tipoYNumeroDeDocumento', $parameter)) {
             $json .= ', "tipoYNumeroDeDocumento": "' . $parameter['tipoYNumeroDeDocumento'] . '" ';
         }
-        if ($parameter['email']) {
+        if (array_key_exists('pais', $parameter)) {
             $json .= ', "pais": "' . $parameter['pais'] . '" ';
         }
-        if ($parameter['eMail']) {
+        if (array_key_exists('eMail', $parameter)) {
             $json .= ', "eMail": "' . $parameter['eMail'] . '" ';
         }
         $json .= '}, "contrato": "' . $parameter["contrato"] . '", "bultosParaEnviar": [{';
         foreach ($parameter["bultosParaEnviar"] as $bulto) {
             $json .= '{';
-            if ($bulto['kilos']) {
+            if (array_key_exists('kilos', $bulto)) {
                 $json .= ', "kilos": "' . $bulto['kilos'] . '" ';
             }
-            if ($bulto['valorDeclaradoConImpuestos']) {
+            if (array_key_exists('valorDeclaradoConImpuestos', $bulto)) {
                 $json .= ', "valorDeclaradoConImpuestos": "' . $bulto['valorDeclaradoConImpuestos'] . '" ';
             }
-            if ($bulto['descripcion']) {
+            if (array_key_exists('descripcion', $bulto)) {
                 $json .= ', "descripcion": "' . $bulto['descripcion'] . '" ';
             }
-            if ($bulto['IdDeProducto']) {
+            if (array_key_exists('IdDeProducto', $bulto)) {
                 $json .= ', "IdDeProducto": "' . $bulto['IdDeProducto'] . '" ';
             }
-            if ($bulto['largoCm']) {
+            if (array_key_exists('largoCm', $bulto)) {
                 $json .= ', "largoCm": "' . $bulto['largoCm'] . '" ';
             }
-            if ($bulto['altoCm']) {
+            if (array_key_exists('altoCm', $bulto)) {
                 $json .= ', "altoCm": "' . $bulto['altoCm'] . '" ';
             }
-            if ($bulto['anchoCm']) {
+            if (array_key_exists('anchoCm', $bulto)) {
                 $json .= ', "anchoCm": "' . $bulto['anchoCm'] . '" ';
             }
             $json .= '}';

@@ -114,15 +114,17 @@ final class AndreaniTest extends TestCase {
         $this->assertTrue(gettype($methods) == 'array');
     }
 
-    public function testCallProdOrdenesDeEnvio(): void {
-        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
-        $methods = $andreani->call('OrdenesDeEnvio', null);
-        $this->assertTrue(gettype($methods) == 'array');
-    }
-
     public function testCallProdObtenerEtiquetaParaImprimir(): void {
         $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
         $methods = $andreani->call('ObtenerEtiquetaParaImprimir', null);
+        $this->assertTrue(gettype($methods) == 'array');
+    }
+
+    public function testCallProdObtenerOrdenesDeEnvio(): void {
+        $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
+        $methods = $andreani->call('OrdenesDeEnvio', ["localidad" => "Argentina", "codigoPostal" => "Argentina", "bultosParaEnviar" => "Argentina", "componentesDeDireccion" => "Argentina", "contrato" => "Argentina", "kilos" => "Argentina", "valorDeclaradoConImpuesto" => "Argentina", "eMail" => "Argentina"]);
+        var_dump($methods);
+        exit;
         $this->assertTrue(gettype($methods) == 'array');
     }
 
