@@ -122,7 +122,7 @@ final class AndreaniTest extends TestCase {
 
     public function testCallProdObtenerOrdenesDeEnvio(): void {
         $andreani = new Andreani('aol_ws', 'pKjr98!52v3', 'prod');
-        $methods = $andreani->call('OrdenesDeEnvio', ["localidad" => "Argentina", "codigoPostal" => "Argentina", "bultosParaEnviar" => "Argentina", "componentesDeDireccion" => "Argentina", "contrato" => "Argentina", "kilos" => "Argentina", "valorDeclaradoConImpuesto" => "Argentina", "eMail" => "Argentina"]);
+        $methods = $andreani->call('OrdenesDeEnvio', ["localidad" => "localidad", "codigoPostal" => "codigoPostal", "bultosParaEnviar" => array(array("kilos" => "kilos", "valorDeclaradoConImpuestos" => "valorDeclaradoConImpuestos")), "componentesDeDireccion" => array(array("meta" => "meta", "contenido" => "contenido")), "contrato" => "contrato", "eMail" => "eMail"]);
         var_dump($methods);
         exit;
         $this->assertTrue(gettype($methods) == 'array');
