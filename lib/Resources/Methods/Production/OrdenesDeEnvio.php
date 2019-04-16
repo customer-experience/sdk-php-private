@@ -77,9 +77,6 @@ class OrdenesDeEnvio implements ProductionInterface {
         }
         $json .= '}]}';
 
-        var_dump($json);
-        exit;
-
         return $curlManager->postJson($url . 'v1/ordenesDeEnvio', $json, array('Content-Type' => 'application/json', 'x-Authorization-token' => $autorizationToken), 'x-Authorization-token:' . $autorizationToken);
     }
 
